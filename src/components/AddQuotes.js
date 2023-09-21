@@ -3,14 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useGetData from '../hooks/useGetData'
 
-// function generateUUID() {
-//   return 'xxxxxxxx4xxxyxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-//     var r = (Math.random() * 16) | 0,
-//         v = c === 'x' ? r : (r & 0x3) | 0x8
-//     return v.toString(16)
-//   })
-// }
-
 function AddQuotes() {
     const navigate = useNavigate()
 
@@ -18,7 +10,7 @@ function AddQuotes() {
 
     // const [quotes, setQuotes] = useState([])
     // const quotes = useGetQuotes()
-    const quotes = useGetData('https://quotes-vfas.onrender.com/quote')
+    const quotes = useGetData('/quote')
     const [quote, setQuote] = useState('')
     const [author, setAuthor] = useState('')
     const [newQuotes, setNewQuotes] = useState(quotes)
@@ -67,16 +59,19 @@ function AddQuotes() {
             onClick={() => navigate('/')}
         >
         Home</button>
-        <section>
-            <h1 className='heading mb-5'>Add Quotes</h1>
-            <form onSubmit={submitHandler}>
+
+        <section className='bg-primary'>
+            <h1 className='heading text-white'>Add Quotes</h1>
+            <form onSubmit={submitHandler} className='mx-3 p-2'>
                 <div className='row d-flex mb-3'>
-                    <label htmlFor='quote' className='text-primary text-start fs-5'>
+                    <label htmlFor='quote' className='text-white text-start fs-5'>
                         Quote:
                     </label>
                     <textarea
                         type='text'
                         className='form-control w-100'
+                        id='quote'
+                        autoComplete='off'
                         ref={quoteRef}
                         onChange={(e) => setQuote(e.target.value)}
                         required
@@ -84,19 +79,21 @@ function AddQuotes() {
                 </div>
                 
                 <div className='row d-flex mb-3'>
-                    <label htmlFor='author' className='text-primary text-start fs-5'>
+                    <label htmlFor='author' className='text-white text-start fs-5'>
                         Author:
                     </label>
                     <input
                         type='text'
                         className='form-control w-100'
+                        id='author'
+                        autoComplete='off'
                         onChange={(e) => setAuthor(e.target.value)}
                         required
                     />
                 </div>
 
-                <div className='d-flex mb-3'>
-                    <button className='btn btn-lg btn-primary mb-3 w-100'>
+                <div className='d-grid'>
+                    <button className='btn btn-lg btn-secondary mb-3 w-100'>
                         Add Quote
                     </button>
                 </div>

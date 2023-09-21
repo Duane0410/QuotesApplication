@@ -1,23 +1,18 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
+import AuthContext from '../../context/AuthProvider'
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
 import useAuth from '../../hooks/useAuth'
 import useFetch from '../../hooks/useFetch'
 
-const LOGIN_URL = '/api/registers'
+const LOGIN_URL = '/login'
 
 function Login() {
-    // const { loading, error, data } = useFetch(`http://localhost:1337` + LOGIN_URL)
-    // if(!loading) {
-    //     console.log('Data - ', data)
-    //     console.log('Error - ', error)
-    // }
+    const { setAuth } = useContext(AuthContext)
 
-    const { setAuth } = useAuth()
-
-    const navigate = useNavigate()
-    const location = useLocation()
-    const from = location.state?.from?.pathname || '/'
+    // const navigate = useNavigate()
+    // const location = useLocation()
+    // const from = location.state?.from?.pathname || '/'
 
     const userRef = useRef()
     const errRef = useRef()
@@ -39,126 +34,48 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user, pass)
 
-        const requestBody = {
-            data: {
-                Username: user,
-                Password: pass
-            }
-        };
-    
+        console.log('Username - ', user, '\nPassword - ', pass)
+
         try {
-            const response = await fetch('http://localhost:3001/api/registers', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
-            });
-    
-            if (response.status === 200) {
-                const result = await response.json();
-                console.log('Result - ', result);
-                localStorage.setItem('login', JSON.stringify({
-                    login: true,
-                    token: result.token
-                }));
-                setSuccess(true);
-            } else {
-                throw new Error('Login Failed');
-            }
-        } catch (error) {
-            console.error(error);
-            setErrMsg('Login Failed');
-        }
+            const response = await axios.post(LOGIN_URL, 
+                JSON.stringify({ "user": user, "pass": pass }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            )
+            console.log(JSON.stringify(response?.data))
 
-        // fetch('http://localhost:3001/api/registers', {
-        //     method: 'POST',
-        //     data: JSON.stringify(
-        //         {
-        //             Username: user,
-        //             Password: pass
-        //         }
-        //     )
-        // }).then((response) => {
-        //     response.json().then((result) => {
-        //         console.log('Result - ', result)
-        //         localStorage.setItem('login', JSON.stringify({
-        //             login: true,
-        //             token: result.token
-        //         }))
-        //     })
-        // }).catch((err) => {
-        //     console.log(err)
-        // });
+            const accessToken = response?.data?.accessToken
+            const roles = response?.data?.roles
 
-        // if(!loading) {
-        //     data.forEach(element => {
-        //         console.log('DataE', ' - ', element.attributes.Username)
-
-        //         if (element.attributes.Username === user) {
-        //             setValidUser(true)
-        //         }
-                
-        //         if (element.attributes.Password === pass) {
-        //             setValidPass(true)
-        //         }
-        //     })
-        // }
-
-        // if (validUser && validPass) {
-        //     setSuccess(true)
-        //     // navigate(from, { replace: true })
-        // } else if (validUser || validPass) {
-        //     setErrMsg('Username or Password is incorrect!')
-        // } else {
-        //     setErrMsg('Login Failed!')
-        // }
-        // errRef.current.focus()
-        
-        
-        // try {
-        //     const response = await axios.post(LOGIN_URL, 
-        //         JSON.stringify({Username: user, Password: pass}), 
-        //         {
-        //             headers: { 'Content-Type': 'application/json'},
-        //             withCredentials: true
-        //         }
-        //     )
+            setAuth({ user, pass, roles, accessToken })
             
-        //     console.log(JSON.stringify(response?.data))
-
-        //     const accessToken = response?.data?.accessToken
-        //     const roles = response?.data?.roles
-
-        //     setAuth({ user, pass, roles, accessToken })
-        //     setUser('')
-        //     setPass('')
-        //     setSuccess(true)
-        //     navigate(from, { replace: true })
-        // } catch (error) {
-        //     console.log('Error response - ', error)
-        //     if (!error?.response) {
-        //         setErrMsg('No Server Response!')
-        //     } else if (error.response?.status === 400) {
-        //         setErrMsg('Missing Username or Password!')
-        //     } else if (error.response?.status === 401) {
-        //         setErrMsg('Unauthorized!')
-        //     } else {
-        //         setErrMsg('Login Failed!')
-        //     }
-        //     // errRef.current.focus()
-        // }
+            setUser('')
+            setPass('')
+            setSuccess(true)
+        } catch (error) {
+            if (!error?.response) {
+                setErrMsg('No Server Response!')
+            } else if (error.response?.status === 400) {
+                setErrMsg('Missing Username or Password!')
+            } else if (error.response?.status === 401) {
+                setErrMsg('Unauthorized!')
+            } else {
+                setErrMsg('Login Failed!')
+            }
+            errRef.current.focus()
+        }
     }
 
   return (
     <>
-        <button
+        {/* <button
             type='button'
             className='btn btn-primary btn-lg qotd'
             onClick={() => navigate('/')}
-        >Home</button>
+        >Home</button> */}
 
         {success ? (
             <section>
@@ -186,7 +103,6 @@ function Login() {
                             ref={userRef}
                             autoComplete='off'
                             onChange={e => setUser(e.target.value)}
-                            value={user}
                             required
                         />
                     </div>
@@ -198,7 +114,6 @@ function Login() {
                             id='password'
                             className='form-control w-100'
                             onChange={e => setPass(e.target.value)}
-                            value={pass}
                             required
                         />
                     </div>

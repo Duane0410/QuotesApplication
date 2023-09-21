@@ -39,7 +39,7 @@ function SoftwareQuotes() {
             onClick={clickHandler}
         >Sign Up</button> */}
 
-        <h1 className='heading' >Software Quotes</h1>
+        <h1 className='heading'>Software Quotes</h1>
 
         <button 
             type='button' 
