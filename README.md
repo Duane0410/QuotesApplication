@@ -26,11 +26,6 @@ The API Endpoint for the application is [https://quotes-vfas.onrender.com](https
 | GET    | /author   | Get a list of all authors |
 | GET    | /quote/search?author=martin | Search for quotes written by author "martin" |
 
-## UI Screens
-
-Below are the UI screens that need to be developed. Note that the provided UI screens are samples, and you are free to design 
-the UI/UX as per your ideas, as long as the API endpoints are consumed.
-
 ### Task 1: Authors (Clicked)
 
 On clicking the "Author" button, display the list of distinct authors from the quotes list.
