@@ -1,0 +1,33 @@
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    width: 100%;
+    /* background-color: #0d6efd; */
+    color: navy;
+    height: 100px;
+    padding: 15px;
+    margin: 0 0 30px 0;
+}
+
+.navigationlinks {
+    display: flex;
+    justify-content: space-around;
+    width: 700px;
+
+    /* background-color: #0d6efd; */
+}
+
+.navigationlinks .btn{
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.btn-primary {
+    --bs-btn-bg: hsl(240, 67%, 54%);
+    --bs-btn-border-color: hsl(240, 67%, 54%);
+    --bs-btn-hover-bg: hsl(240, 67%, 40%);
+    --bs-btn-hover-border-color: hsl(240, 67%, 40%);
+}

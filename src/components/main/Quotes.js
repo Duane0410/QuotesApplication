@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import SoftwareQuotes from './SoftwareQuotes'
+import SoftwareQuotes from '../SoftwareQuotes'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useGetData from '../../hooks/useGetData'
 
@@ -35,7 +35,7 @@ function Quotes() {
 
   return (
     <div>
-        <SoftwareQuotes />
+        {/* <SoftwareQuotes /> */}
     
         <form onSubmit={submitHandler} className='input-group mb-3'>
             <label 
@@ -51,6 +51,7 @@ function Quotes() {
                     ref={searchRef}
                     className='form-control'
                     id='search'
+                    autoComplete='off'
                     onChange={e => setValue(e.target.value)}
                 />
                 :<input 
@@ -58,6 +59,7 @@ function Quotes() {
                     ref={searchRef}
                     className='form-control'
                     id='search'
+                    autoComplete='off'
                     value={value}
                     onChange={e => setValue(e.target.value)}
                 />

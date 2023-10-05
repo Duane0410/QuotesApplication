@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import SoftwareQuotes from './SoftwareQuotes'
+import SoftwareQuotes from '../SoftwareQuotes'
 import useGetData from '../../hooks/useGetData'
 
 function Authors() {
@@ -8,7 +8,7 @@ function Authors() {
 
   return (
     <div>
-      <SoftwareQuotes />
+      {/* <SoftwareQuotes /> */}
       
       <h1 className='text-body-secondary'>Authors</h1>
 

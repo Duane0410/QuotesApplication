@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './static/App.css';
-import SoftwareQuotes from './components/main/SoftwareQuotes';
+import SoftwareQuotes from './components/SoftwareQuotes';
 import Authors from './components/main/Authors';
 import Quotes from './components/main/Quotes';
 import AddQuotes from './components/AddQuotes';
@@ -11,6 +11,7 @@ import LogIn from './components/authentication/LogIn';
 import Register from './components/authentication/Register';
 import Layout from './components/Layout';
 import Missing from './components/main/Missing';
+import Home from './components/main/Home';
 // import RequireAuth from './components/RequireAuth'
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
             <Route path='/' element={<Layout />}>
                 <Route path='register' element={<Register />} />
                 <Route path='log-in' element={<LogIn />} />
-                <Route path='/' element={<SoftwareQuotes />} />
+                <Route path='/' element={<Home />} />
                 <Route path='authors' element={<Authors />} />
                 <Route path='quotes' element={<Quotes />} />
 
