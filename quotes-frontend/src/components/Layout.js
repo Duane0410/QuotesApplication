@@ -9,7 +9,7 @@ const Layout = () => {
         <div className='nav-header'>
             <SoftwareQuotes />
         </div>
-        <div className='App'>
+        <div className='app-body'>
             <Outlet />
         </div>
     </main>

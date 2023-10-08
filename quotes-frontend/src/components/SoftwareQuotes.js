@@ -60,10 +60,10 @@ function SoftwareQuotes() {
         >Sign Up</button> */}
 
         <nav>
-            <div class="heading">
+            <div className="heading">
                 Software Quotes
             </div>
-            <div class="navigationlinks">
+            <div className="navigationlinks">
                 <button 
                     className='btn btn-outline-primary'
                     value='authors' 
@@ -78,7 +78,7 @@ function SoftwareQuotes() {
                     onClick={clickHandler}
                 >Quotes
                 </button>
-                <Button className='btn btn-primary' onClick={handleShow}>
+                <Button className='btn btn-info' onClick={handleShow}>
                     Quote of the Day
                 </Button>
             </div>

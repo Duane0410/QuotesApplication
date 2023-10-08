@@ -1,3 +1,12 @@
-.App{
+.app-body {
     margin: 0 30px;
+    padding-top: 120px;
+}
+
+.nav-header {
+    width: 100%;
+    height: 100px;
+    background-color: #000080;
+    position: fixed;
+    z-index: 10;
 }
